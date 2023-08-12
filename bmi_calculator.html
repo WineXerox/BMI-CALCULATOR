@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+
+    <title>BMI Calculator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" >
+    <style>
+    .round-box {
+      position: relative;
+      padding: 45px 15px 15px;
+      border-color: #e5e5e5 #eee #eee;
+      border-style: solid;
+      border-width: 1px 0;
+      -webkit-box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+      box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+    }
+    #result-panel {
+      visibility: hidden;
+    }
+    #result {
+      font-size: 50px;
+      text-align:center;
+    }
+    tr.bmi1 td {
+      background: #e2f53c;
+      color: #fff;
+    }
+    tr.bmi2 td {
+      background: #09d802;
+      color: #fff;
+    }
+    tr.bmi3 td {
+      background: #fcdd32;
+      color: #fff;
+    }
+    tr.bmi4 td {
+      background: #eeb702;
+      color: #fff;
+    }
+    tr.bmi5 td {
+      background: #ee1d02;
+      color: #fff;
+    }
+    </style>
+  </head>
+
+  <body onload="ClickImg()">
+    <div class="container">
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron ">
+        <h2>BMI Calculator</h2>
+        <p>การหาค่าดัชนีมวลกาย (Body Mass Index : BMI) คือเป็นมาตรการที่ใช้ประเมินภาวะอ้วนและผอมในผู้ใหญ่ ตั้งแต่อายุ 20 ปีขึ้นไป สามารถทำได้โดยการชั่งน้ำหนักตัวเป็นกิโลกรัม และวัดส่วนสูงเป็นเซนติเมตร แล้วนำมาหาดัชมีมวลกาย</p>
+      </div>
+
+      <div class="row">
+        <div class="round-box col-sm-4 col-sm-offset-1">
+          <form>
+            <!-- กรอกส่วนสูง -->
+            <div class="form-group">
+              <label for="InputHeight">ส่วนสูง (cm.)</label>
+              <input type="number" class="form-control" id="InputHeight" onblur="err_hei()">
+              <span class="text-danger mt-2" id="show_hei"></span>
+            </div>
+            <!-- กรอกน้ำหนัก -->
+            <div class="form-group">
+              <label for="InputWeight">น้ำหนัก (kg.)</label>
+              <input type="number" class="form-control" id="InputWeight" onblur="err_wei()">
+              <span class="text-danger mt-2" id="show_wei"></span>
+            </div>
+            <!-- สุ่มภาพ -->
+            <div class="form-group">
+              <label>คนในรูปคือใคร </label>
+              <button type="button" class="btn btn-default" onclick="ClickImg()">
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+              </button>
+              <img src="image1.jpg"  id="CaptchaImage" alt="captcha" width="200px"/>
+              <input type="text" class="form-control" id="InputCaptcha" onkeyup="upper_word()">
+              <span class="text-danger mt-2" id="show_err"></span>
+            </div>
+            <button type="button" class="btn btn-success" onclick="result_bmi()">คำนวณ</button>
+          </form>
+        </div>
+        <!-- ตาารางในการคำนวนแสดงผล -->
+        <div class="round-box col-sm-5 col-sm-offset-1" id="result-panel">
+          <h2>BMI:</h2>
+          <p id="result"></p>
+          <table class="table" id="tableactive">
+  					<tbody>
+  						<tr class="">
+  							<td><strong>BMI kg/m<sup>2</sup></strong></td>
+  							<td><strong>อยู่ในเกณท์</strong></td>
+  							<td><strong>ภาวะเสี่ยงต่อโรค</strong></td>
+  						</tr>
+  						<tr class="">
+  							<td>น้อยกว่า 18.50</td>
+  							<td>น้ำหนักน้อย / ผอม</td>
+  							<td>มากกว่าคนปกติ</td>
+  						</tr>
+  						<tr class="">
+  							<td>ระหว่าง 18.50 - 22.90</td>
+  							<td>ปกติ (สุขภาพดี)</td>
+  							<td>เท่าคนปกติ</td>
+  						</tr>
+  						<tr class="">
+  							<td>ระหว่าง 23 - 24.90</td>
+  							<td>ท้วม / โรคอ้วนระดับ 1</td>
+  							<td>อันตรายระดับ 1</td>
+  						</tr>
+  						<tr class="">
+  							<td>ระหว่าง 25 - 29.90</td>
+  							<td>อ้วน / โรคอ้วนระดับ 2</td>
+  							<td>อันตรายระดับ 2</td>
+  						</tr>
+  						<tr class=""> 
+  							<td>มากกว่า 30</td>
+  							<td>อ้วนมาก / โรคอ้วนระดับ 3</td>
+  							<td>อันตรายระดับ 3</td>
+  						</tr>
+  					</tbody>
+				  </table>
+        </div>
+      </div><!-- /row -->
+    </div> <!-- /container -->
+    <script src="app.js"></script>
+  </body>
+</html>
